@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>new appointment</title>
+</head>
+<body>
+<form action="/appointments/add" method="post">
+  Doctor:<select name="doctor.id">
+  <option th:each="doc : ${doctorList}"
+          th:text="${doc.name}" th:value="${doc.id}"></option>
+</select><br>
+  Patient:<select name="patient.id">
+  <option th:each="pat : ${patientList}"
+          th:text="${pat.name}" th:value="${pat.id}"></option>
+</select><br>
+  date:<input type="datetime-local" name="dateTime"><br>
+  <input type="submit" value="add">
+</form><br>
+<a href="/patients">Back</a>
+</body>
+</html>

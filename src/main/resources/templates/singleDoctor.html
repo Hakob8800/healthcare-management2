@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${doctor.name}"></title>
+</head>
+<body>
+<img th:if="${doctor.profilePic != null}" th:src="@{/getImage(imageName=${doctor.profilePic})}" width="300"/><br>
+<h3 th:text="${doctor.name}"></h3>
+<h3 th:text="${doctor.surname}"></h3>
+<h4 th:text="${doctor.specialty}"></h4>
+<h4 th:text="${doctor.email}"></h4>
+<h4 th:text="${doctor.phoneNumber}"></h4>
+<a href="/doctors">Back</a>
+</body>
+</html>

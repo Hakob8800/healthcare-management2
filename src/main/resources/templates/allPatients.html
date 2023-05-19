@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Patients</title>
+</head>
+<body>
+<a href="patients/add">add patient</a>
+<table border="1">
+    <tr>
+        <th>name</th>
+        <th>surname</th>
+        <th>dateOfBirthday</th>
+    </tr>
+    <tr th:each="patient : ${patientList}">
+        <td th:text="${patient.name}"></td>
+        <td th:text="${patient.surname}"></td>
+        <td th:text="${patient.dateOfBirthday}"></td>
+        <td><a th:href="@{/patients/remove(id=${patient.id})}">Delete</a></td>
+    </tr>
+</table>
+<a href="/">Back</a>
+</body>
+</html>
