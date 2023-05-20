@@ -1,6 +1,5 @@
 package com.example.healthcaremanagement.config;
 
-import com.example.healthcaremanagement.security.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +26,7 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET, "/").permitAll()
                 .requestMatchers("/user/register").permitAll()
+                .requestMatchers("/doctors/add").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin();

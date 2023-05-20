@@ -5,7 +5,9 @@
     <title>Doctors</title>
 </head>
 <body>
+<div th:if="${user.userType.equals(user.userType.ADMIN)}">
 <a href="doctors/add">add doctor</a>
+</div>
 <table border="1">
     <tr>
         <th>surname</th>
