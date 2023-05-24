@@ -2,6 +2,7 @@ package com.example.healthcaremanagement.controller;
 
 import com.example.healthcaremanagement.entity.Patient;
 import com.example.healthcaremanagement.repository.PatientRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -9,10 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/patients")
+@RequiredArgsConstructor
 public class PatientController {
 
-    @Autowired
-    PatientRepository patientRepository;
+
+    private final PatientRepository patientRepository;
 
     @GetMapping
     public String allPatients(ModelMap modelMap) {

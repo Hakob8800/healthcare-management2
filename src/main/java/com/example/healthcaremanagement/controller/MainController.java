@@ -1,5 +1,7 @@
 package com.example.healthcaremanagement.controller;
 
+import com.example.healthcaremanagement.entity.User;
+import com.example.healthcaremanagement.entity.UserType;
 import com.example.healthcaremanagement.security.CurrentUser;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +29,25 @@ public class MainController {
             modelMap.addAttribute("user", currentUser.getUser());
         }
         return "index";
+    }
+
+    @GetMapping("/customLogin")
+    public String customLoginPage() {
+        return "customLoginPage";
+    }
+
+    @GetMapping("/customSuccessLogin")
+    public String customSuccessLogin(@AuthenticationPrincipal CurrentUser currentUser) {
+        if (currentUser != null) {
+            User user = currentUser.getUser();
+            if(user.getUserType()== UserType.ADMIN){
+                return "redirect:/user/admin";
+            }
+            else if (user.getUserType()==UserType.USER){
+                return "redirect:/";
+            }
+        }
+        return "redirect:/";
     }
 
     @GetMapping(value = "/getImage", produces = MediaType.IMAGE_JPEG_VALUE)

@@ -1,5 +1,6 @@
 package com.example.healthcaremanagement.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,13 +13,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@RequiredArgsConstructor
 public class SpringSecurityConfig {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
+
+    private final UserDetailsService userDetailsService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -29,7 +30,15 @@ public class SpringSecurityConfig {
                 .requestMatchers("/doctors/add").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                .loginPage("/customLogin")
+                .permitAll()
+                .defaultSuccessUrl("/customSuccessLogin")
+                .loginProcessingUrl("/login")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
+                .permitAll();
         return httpSecurity.build();
     }
 

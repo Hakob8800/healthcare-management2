@@ -4,20 +4,19 @@ import com.example.healthcaremanagement.entity.Appointment;
 import com.example.healthcaremanagement.repository.AppointmentRepository;
 import com.example.healthcaremanagement.repository.DoctorRepository;
 import com.example.healthcaremanagement.repository.PatientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/appointments")
+@RequiredArgsConstructor
 public class AppointmentController {
-    @Autowired
-    private AppointmentRepository appointmentRepository;
-    @Autowired
-    private PatientRepository patientRepository;
-    private @Autowired
-    DoctorRepository doctorRepository;
+
+    private final AppointmentRepository appointmentRepository;
+    private final PatientRepository patientRepository;
+    private final DoctorRepository doctorRepository;
 
     @GetMapping
     public String allAppointments(ModelMap modelMap) {
@@ -26,7 +25,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/add")
-    public String addAppoGet(ModelMap modelMap) {
+    public String addAppointmentGet(ModelMap modelMap) {
         modelMap.addAttribute("patientList", patientRepository.findAll());
         modelMap.addAttribute("doctorList", doctorRepository.findAll());
         return "addAppointment";
